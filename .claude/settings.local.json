@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /d/Projects/Team-Workspace log --oneline -5)",
+      "Bash(git -C /d/Projects/Team-Workspace status)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(npm create *)",
+      "Bash(Get-ChildItem -Path \"d:\\\\Projects\\\\Team-Workspace\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)"
+    ]
+  }
+}
