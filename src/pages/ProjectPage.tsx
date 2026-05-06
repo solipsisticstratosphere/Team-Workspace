@@ -65,7 +65,7 @@ export default function ProjectPage() {
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b glass">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
             <Link to="/"><ArrowLeft className="h-5 w-5" /></Link>
           </Button>
@@ -75,7 +75,7 @@ export default function ProjectPage() {
 
       {/* Tabs */}
       <div className="border-b glass/80 sticky top-16 z-40">
-        <div className="max-w-7xl mx-auto px-4 flex gap-2">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex gap-2">
           {tabs.map(({ key, label, icon }) => (
             <button
               key={key}

@@ -73,58 +73,62 @@ export function DocumentsTab({ projectId, userRole }: Props) {
   }
 
   return (
-    <div className="flex h-[calc(100vh-112px)]">
-      {/* Sidebar */}
-      <div className="w-60 border-r flex flex-col shrink-0">
-        <div className="p-3 border-b flex items-center justify-between">
-          <span className="text-sm font-medium">Documents</span>
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={createDoc} disabled={creating}>
-            {creating ? <Loader2 className="h-3 w-3 animate-spin" /> : <Plus className="h-3 w-3" />}
-          </Button>
-        </div>
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
-          {docs.length === 0 && (
-            <p className="text-xs text-muted-foreground text-center py-6">No documents yet</p>
-          )}
-          {docs.map((doc) => (
-            <button
-              key={doc.id}
-              onClick={() => setSelectedDoc(doc)}
-              className={cn(
-                'w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors group',
-                selectedDoc?.id === doc.id ? 'bg-accent' : 'hover:bg-muted',
-                doc.is_archived && 'opacity-50'
+    <div className="h-[calc(100vh-112px)] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full">
+        <div className="flex h-full">
+          {/* Sidebar */}
+          <div className="w-60 border-r flex flex-col shrink-0">
+            <div className="p-3 border-b flex items-center justify-between">
+              <span className="text-sm font-medium">Documents</span>
+              <Button variant="ghost" size="icon" className="h-7 w-7" onClick={createDoc} disabled={creating}>
+                {creating ? <Loader2 className="h-3 w-3 animate-spin" /> : <Plus className="h-3 w-3" />}
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+              {docs.length === 0 && (
+                <p className="text-xs text-muted-foreground text-center py-6">No documents yet</p>
               )}
-            >
-              {doc.is_archived ? (
-                <Archive className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              ) : (
-                <FileText className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              )}
-              <span className="truncate flex-1">{doc.title || 'Untitled'}</span>
-              {userRole === 'admin' && (
+              {docs.map((doc) => (
                 <button
-                  onClick={(e) => { e.stopPropagation(); toggleArchive(doc) }}
-                  className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-foreground"
-                  title={doc.is_archived ? 'Unarchive' : 'Archive'}
+                  key={doc.id}
+                  onClick={() => setSelectedDoc(doc)}
+                  className={cn(
+                    'w-full text-left flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-colors group',
+                    selectedDoc?.id === doc.id ? 'bg-accent' : 'hover:bg-muted',
+                    doc.is_archived && 'opacity-50'
+                  )}
                 >
-                  <Archive className="h-3 w-3" />
+                  {doc.is_archived ? (
+                    <Archive className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  ) : (
+                    <FileText className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  )}
+                  <span className="truncate flex-1">{doc.title || 'Untitled'}</span>
+                  {userRole === 'admin' && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleArchive(doc) }}
+                      className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-foreground"
+                      title={doc.is_archived ? 'Unarchive' : 'Archive'}
+                    >
+                      <Archive className="h-3 w-3" />
+                    </button>
+                  )}
                 </button>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Editor */}
-      <div className="flex-1 overflow-hidden">
-        {selectedDoc ? (
-          <DocumentEditor doc={selectedDoc} onUpdate={handleDocUpdate} />
-        ) : (
-          <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-            Select a document or create a new one
+              ))}
+            </div>
           </div>
-        )}
+
+          {/* Editor */}
+          <div className="flex-1 overflow-hidden">
+            {selectedDoc ? (
+              <DocumentEditor doc={selectedDoc} onUpdate={handleDocUpdate} />
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                Select a document or create a new one
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

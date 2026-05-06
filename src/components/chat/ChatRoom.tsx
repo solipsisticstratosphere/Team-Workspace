@@ -35,7 +35,8 @@ export function ChatRoom({ projectId }: Props) {
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 py-4 space-y-4">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -83,10 +84,11 @@ export function ChatRoom({ projectId }: Props) {
           })
         )}
         <div ref={bottomRef} />
+        </div>
       </div>
 
       {/* Input */}
-      <div className="border-t glass p-4 mt-auto">
+      <div className="border-t glass px-6 lg:px-8 py-4 mt-auto">
         <form onSubmit={handleSubmit} className="flex gap-3 max-w-4xl mx-auto">
           <Input
             placeholder="Type a message..."
